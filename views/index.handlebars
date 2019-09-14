@@ -8,23 +8,34 @@
 
 <div class="container">
 
+    <h3>Available Burgers</h3>
+
     <ul>
         {{#each burgers}}
-
+            {{#unless devoured}}
             <div>
 
                 <div class="buger-name">{{name}}</div>
                 <button data-burger="{{name}}" class="deleteBurger"></button>
 
             </div>
+            {{/unless}}
 
         {{/each}}
     </ul>
 
+    <h3>Eaten burger</h3>
+    
     <ul>
 
-        {{#each }}
-            <div></div>
+        {{#each burgers}}
+
+            {{#if devoured}}
+
+            <div>{{name}}</div>
+
+            {{/if}}
+        {{/each}}
     </ul>
 
 </div>
