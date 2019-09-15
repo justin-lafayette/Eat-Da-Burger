@@ -59,13 +59,14 @@ $(function() {
 
     $(".devour-burger").on("click", function(event) {
         var id = $(this).data("id");
-        var eaten = $(this).data("eaten");
 
         var changeEatenState = {
 
-            devoured: eaten
+            devoured: true
 
         };
+
+        console.log(changeEatenState);
 
         $.ajax("/api/burgers/" + id, {
             type: "PUT",
