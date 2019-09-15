@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron text-center">
 
     <h1 class="display-4">Eat-Da-Burger!</h1>
 
@@ -15,8 +15,8 @@
             {{#unless devoured}}
             <li>
 
-                <div class="buger-name">{{this.name}}</div>
-                <button data-id="{{this.id}}" class="deleteBurger">Devour it!</button>
+                <div class="burger">{{this.burger_name}}</div>
+                <button data-id="{{this.id}}" data-eaten={{this.devoured}} class="devour-burger">Devour it!</button>
 
             </li>
             {{/unless}}
@@ -32,11 +32,13 @@
 
             {{#if devoured}}
 
-            <div>{{this.name}}</div>
+            <div>{{this.burger_name}}</div>
 
             {{/if}}
         {{/each}}
     </ul>
+
+    <h3>Make your own!</h3>
 
     <form class="create-form">
 
@@ -50,3 +52,33 @@
     </form>
 
 </div>
+
+<script type="text/javascript">
+
+$(function() {
+
+    $(".devour-burger").on("click", function(event) {
+        var id = $(this).data("id");
+        var eaten = $(this).data("eaten");
+
+        var changeEatenState = {
+
+            devoured: eaten
+
+        };
+
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: changeEatenState
+        })
+            .then(function() {
+
+                console.log("Eaten changed to ", changeEatenState);
+
+                location.reload();
+            });
+
+    })
+})
+
+</script>
