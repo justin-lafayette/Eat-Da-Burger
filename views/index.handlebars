@@ -6,37 +6,32 @@
 
 </div>
 
-<div class="container">
+<div class="container text-center">
 
     <h3>Available Burgers</h3>
 
-    <ul>
-        {{#each burgers}}
-            {{#unless devoured}}
-            <li>
+    {{#each burgers}}
+        {{#unless devoured}}
 
-                <div class="burger">{{this.burger_name}}</div>
-                <button data-id="{{this.id}}" data-eaten={{this.devoured}} class="devour-burger">Devour it!</button>
+            <div class="burger">{{this.burger_name}}
+            <button data-id="{{this.id}}" data-eaten={{this.devoured}} class="devour-burger">Devour it!</button>
+            </div>
 
-            </li>
-            {{/unless}}
+        
+        {{/unless}}
 
-        {{/each}}
-    </ul>
+    {{/each}}
 
     <h3>Eaten burger</h3>
 
-    <ul>
+    {{#each burgers}}
 
-        {{#each burgers}}
+        {{#if devoured}}
 
-            {{#if devoured}}
+        <div>{{this.burger_name}}</div>
 
-            <div>{{this.burger_name}}</div>
-
-            {{/if}}
-        {{/each}}
-    </ul>
+        {{/if}}
+    {{/each}}
 
     <h3>Make your own!</h3>
 
@@ -44,7 +39,7 @@
 
         <div class="form-group">
 
-            <input type="text" id="createBurger" name="name" placeholder="Make a burger!">
+            <input type="text" id="createBurger" name="burger_name" placeholder="Make a burger!">
 
         </div>
 
@@ -85,8 +80,27 @@ $(function() {
 
         event.preventDefault();
 
-        var newBurger = 0
-    })
-})
+        var newBurger = {
+
+            burger_name: $("#createBurger").val().trim(),
+
+        };
+
+        console.log("Form Values: " + JSON.stringify(newBurger));
+
+        $.ajax("/api/burgers", {
+            type: "POST",
+            data: newBurger
+        })
+            .then(
+                function() {
+
+                    console.log("Creating new burger");
+
+                    location.reload();
+                }
+            );
+    });
+});
 
 </script>

@@ -29,10 +29,10 @@ router.post("/api/burgers", function(req, res) {
     console.log("Burger_Controller-router.post");
 
     burger.create([
-        "name"
+        "burger_name"
     ], 
     [
-        req.body.name
+        req.body.burger_name
     ], 
     function(result) {
 
@@ -55,8 +55,9 @@ router.put("/api/burgers/:id", function(req, res) {
         devoured: req.body.devoured
     },
     condition, function(result) {
-
+        
         console.log("Req.body.devoured: " + req.body.devoured);
+        console.log("Req.body line 60 in burger controller: " + JSON.stringify(req.body)); 
         console.log("Result: " + result);
         console.log("");
 

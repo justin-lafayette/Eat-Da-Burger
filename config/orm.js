@@ -18,26 +18,28 @@ var orm = {
             callBack(results);
         });
     },
-    insertOne: function(table, newBurger, callBack) {
-        var queryString = "INSERT INTO ?? VALUES (??)"
+    insertOne: function(table, newBurger, values, callBack) {
+        var queryString = "INSERT INTO ?? (" + newBurger + ") VALUES ('" + values + "');";
 
         console.log("");
         console.log("ORM-insertOne");
         console.log("ORM-table: " + table);
         console.log("ORM-newBurger: " + newBurger);
+        console.log("ORM-values: " + values);
 
-        connection.query(queryString, [table, newBurger], function(err, results) {
-
-            if( err ) throw err;
-
+        connection.query(queryString, [table], function(err, results) {
+            
+            console.log("ORM-QueryString: " + queryString, [table, newBurger, values]);
             console.log("ORM-results: " + JSON.stringify(results));
             console.log("");
+
+            if( err ) throw err;
 
             callBack(results);
         });
     },
     updateOne: function(table, column, id, callBack) {
-        var queryString = "UPDATE ?? SET devoured=true WHERE ?? = ?";
+        var queryString = "UPDATE ?? SET devoured = true WHERE " + id;
 
         console.log("");
         console.log("ORM-updateOne");
@@ -45,8 +47,10 @@ var orm = {
         console.log("ORM-column: " + JSON.stringify(column));
         console.log("ORM-id: " + id);
 
-        connection.query(queryString, [column, table, id, id], function(err, results) {
-
+        connection.query(queryString, [table], function(err, results) {
+            
+            console.log("QueryString: " + queryString);
+            console.log("ORM-results: " + results);
             console.log("ORM-results: " + JSON.stringify(results));
             console.log("");
 

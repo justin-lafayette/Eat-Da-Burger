@@ -5,19 +5,20 @@ var burger = {
         orm.selectAll("burgers", function(res) {
 
             console.log("");
-            console.log("Burger.JS");
-            console.log("Select all: " + JSON.stringify(res));
+            console.log("Burger.JS-selectAll");
+            console.log("res: " + JSON.stringify(res));
             console.log("");
 
             callBack(res);
         });
     },
-    create: function(newBurger, callBack) {
-        orm.insertOne("burgers", newBurger, callBack, function(res) {
+    create: function(newBurger, values, callBack) {
+        orm.insertOne("burgers", newBurger, values, function(res) {
 
             console.log("");
-            console.log("Burger.JS")
-            console.log("Insert one: " + JSON.stringify(res));
+            console.log("Burger.JS-insertOne");
+            console.log("newBurger: " + newBurger);
+            console.log("res: " + JSON.stringify(res));
             console.log("");
 
             callBack(res);
@@ -27,13 +28,14 @@ var burger = {
         orm.updateOne("burgers", column, id, function(res) {
 
             console.log("");
-            console.log("Burger-column: " + JSON.stringify(column));
-            console.log("Burger-id: " + id);
+            console.log("Burger.JS-updateOne");
+            console.log("column: " + JSON.stringify(column));
+            console.log("id: " + id);
 
-            console.log('Update one: ' + JSON.stringify(res));
+            console.log("res: " + JSON.stringify(res));
             console.log("");
 
-            callBack("buger-res: " + res);
+            callBack(res);
         });
     }
 };
