@@ -13,12 +13,12 @@
     <ul>
         {{#each burgers}}
             {{#unless devoured}}
-            <div>
+            <li>
 
-                <div class="buger-name">{{name}}</div>
-                <button data-burger="{{name}}" class="deleteBurger"></button>
+                <div class="buger-name">{{this.name}}</div>
+                <button data-id="{{this.id}}" class="deleteBurger">Devour it!</button>
 
-            </div>
+            </li>
             {{/unless}}
 
         {{/each}}
@@ -32,7 +32,7 @@
 
             {{#if devoured}}
 
-            <div>{{name}}</div>
+            <div>{{this.name}}</div>
 
             {{/if}}
         {{/each}}

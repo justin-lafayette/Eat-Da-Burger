@@ -13,10 +13,10 @@ var orm = {
             callBack(results);
         });
     },
-    insertOne: function(table, burger, callBack) {
+    insertOne: function(table, newBurger, callBack) {
         var queryString = "INSERT INTO ?? VALUES (??)"
 
-        connection.query(queryString, [table, burger], function(err, results) {
+        connection.query(queryString, [table, newBurger], function(err, results) {
 
             if( err ) throw err;
 
